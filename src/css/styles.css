@@ -48,3 +48,17 @@ body {
   margin: auto;
   display: block;
 }
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.feedback-form > button {
+  background-color: pink;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+}
