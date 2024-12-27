@@ -1,3 +1,8 @@
+// Описаний в документації
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const images = [
   {
     preview:
@@ -82,21 +87,10 @@ const galleryMarkup = images
   .join('');
 
 gallery.innerHTML = galleryMarkup;
-
-gallery.addEventListener('click', event => {
-  event.preventDefault();
-  // console.log(event.target.tagName);
-  // console.log(event.target);
-  const clickedImg = event.target;
-  if (clickedImg.tagName !== 'IMG') return;
-
-  const largeImageUrl = clickedImg.dataset.source;
-
-  const modal = basicLightbox.create(`  
-  <div class="modal">
-      <img src="${largeImageUrl}" />
-    </div>
-  `);
-
-  modal.show();
+const lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionSelector: 'img',
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionDelay: 250,
 });
