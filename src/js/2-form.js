@@ -1,13 +1,13 @@
 const feedbackForm = document.querySelector('.feedback-form');
 
-let formData = {
+let formData = JSON.parse(localStorage.getItem('feedback-form-data')) || {
   email: '',
   message: '',
 };
 
 const fillFields = () => {
   try {
-    if (localStorage.length === 0) {
+    if (!localStorage.getItem('feedback-form-data')) {
       return;
     }
     const formDataFromLS = JSON.parse(
@@ -20,7 +20,7 @@ const fillFields = () => {
       feedbackForm.elements[key].value = formDataFromLS[key];
     }
   } catch (error) {
-    console.log(err);
+    console.log(error);
   }
 };
 
@@ -47,7 +47,8 @@ const onFormSubmit = event => {
   const { currentTarget: formEl } = event;
   formEl.reset();
   localStorage.removeItem('feedback-form-data');
+  formData = { email: '', message: '' };
 };
 
-feedbackForm.addEventListener('change', onFormFieldChange);
+feedbackForm.addEventListener('input', onFormFieldChange);
 feedbackForm.addEventListener('submit', onFormSubmit);
